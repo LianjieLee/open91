@@ -44,40 +44,40 @@ class Porn:
         for page in page_list:
             self.getVideoList(page)
         for key in self.new_key:
-            if time.time()-start>5400:
-                break
-            # 解析视频直链
-            try:
-                link = f'http://www.91porn.com/view_video.php?viewkey={key}'
-                title, poster, video, author = parse(link)
-                print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 解析完毕！', flush=True)
-            except Exception as e:
-                print("提取视频直链过程：", e, flush=True)
-                continue
-            # 下载视频
-            try:
-                name = os.getcwd() + f'/{key}.mp4'
-                download(video, name)
-                size = os.path.getsize(name)
-                print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 下载完成！', flush=True)
-            except Exception as e:
-                print("下载视频过程：", e, flush=True)
-                continue
-            # 上传视频
-            try:
-                if size < 1024:
-                    print(f'{title}  {size}byte < 1k, maybe get 403 page', flush=True)
-                elif size < 100 * 1024:
-                    print(f'{title} {size / 1024}k < 100k, may be get warning video', flush=True)
-                else:
-                    update = time.strftime('%Y%m%d')
-                    msg = title + f"\nViewkey: {key}\n作者: #{author}\n日期: #on{update}"
-                    os.system(f'python3 ./uploader.py {peer_name} {name} "{msg}" {poster}')
-                    print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 上传完成！', flush=True)
-                os.remove(name)
-            except Exception as e:
-                print("上传视频过程：", e, flush=True)
-                continue
+            # if time.time()-start>5400:
+            #     break
+            # # 解析视频直链
+            # try:
+            #     link = f'http://www.91porn.com/view_video.php?viewkey={key}'
+            #     title, poster, video, author = parse(link)
+            #     print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 解析完毕！', flush=True)
+            # except Exception as e:
+            #     print("提取视频直链过程：", e, flush=True)
+            #     continue
+            # # 下载视频
+            # try:
+            #     name = os.getcwd() + f'/{key}.mp4'
+            #     download(video, name)
+            #     size = os.path.getsize(name)
+            #     print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 下载完成！', flush=True)
+            # except Exception as e:
+            #     print("下载视频过程：", e, flush=True)
+            #     continue
+            # # 上传视频
+            # try:
+            #     if size < 1024:
+            #         print(f'{title}  {size}byte < 1k, maybe get 403 page', flush=True)
+            #     elif size < 100 * 1024:
+            #         print(f'{title} {size / 1024}k < 100k, may be get warning video', flush=True)
+            #     else:
+            #         update = time.strftime('%Y%m%d')
+            #         msg = title + f"\nViewkey: {key}\n作者: #{author}\n日期: #on{update}"
+            #         os.system(f'python3 ./uploader.py {peer_name} {name} "{msg}" {poster}')
+            #         print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 上传完成！', flush=True)
+            #     os.remove(name)
+            # except Exception as e:
+            #     print("上传视频过程：", e, flush=True)
+            #     continue
             self.old_key.append(key)
         self.updateList()
 
@@ -96,4 +96,4 @@ if __name__ == '__main__':
                 'http://www.91porn.com/v.php?category=hot&page=2',
                 'http://www.91porn.com/v.php?category=hot&page=3']
     all_video.main(all_peer_name, all_page, start)
-    hot_video.main(hot_peer_name, hot_page, start)
+    # hot_video.main(hot_peer_name, hot_page, start)
