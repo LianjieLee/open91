@@ -32,9 +32,12 @@ jobs:
             openssl enc -aes128 -pbkdf2 -in tg_client.session -out tg_client.aes128 -pass env:API_HASH && rm tg_client.session
 
       - name: Update repo
+        env:
+          ACTOR: ${{ github.actor }}
+          REPO: ${{ github.repository }}
         run: |
-          git config --local user.email "you@example.com"
-          git config --local user.name "Your Name"
+          git config --local user.email "${ACTOR}@users.noreply.github.com"
+          git config --local user.name "${ACTOR}"
           git add .
           git commit -m 'update' || exit 0
           git push origin main
