@@ -32,13 +32,13 @@ class Porn:
             key = parse_qs(urlparse(link).query)["viewkey"][0]
             if key not in self.old_key:
                 self.new_key.append(key)
-        print(time.strftime('%Y-%m-%d %H:%M:%S'), f'待获取{self.name}视频{len(self.new_key)}个')
+        print(time.strftime('%Y-%m-%d %H:%M:%S'), f'待获取{self.name}视频{len(self.new_key)}个', flush=True)
 
     def updateList(self):
         self.old_key = self.old_key[-240:len(self.old_key)]
         with open(f'{self.name}.json', 'w') as f:
             json.dump(self.old_key, f)
-        print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{self.name}列表信息更新完毕')
+        print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{self.name}列表信息更新完毕', flush=True)
 
     def main(self, peer_name, page_list, start):
         for page in page_list:
@@ -50,33 +50,33 @@ class Porn:
             try:
                 link = f'http://www.91porn.com/view_video.php?viewkey={key}'
                 title, poster, video, author = parse(link)
-                print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 解析完毕！')
+                print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 解析完毕！', flush=True)
             except Exception as e:
-                print("提取视频直链过程：", e)
+                print("提取视频直链过程：", e, flush=True)
                 continue
             # 下载视频
             try:
                 name = os.getcwd() + f'/{key}.mp4'
                 download(video, name)
                 size = os.path.getsize(name)
-                print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 下载完成！')
+                print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 下载完成！', flush=True)
             except Exception as e:
-                print("下载视频过程：", e)
+                print("下载视频过程：", e, flush=True)
                 continue
             # 上传视频
             try:
                 if size < 1024:
-                    print(f'{title}  {size}byte < 1k, maybe get 403 page')
+                    print(f'{title}  {size}byte < 1k, maybe get 403 page', flush=True)
                 elif size < 100 * 1024:
-                    print(f'{title} {size / 1024}k < 100k, may be get warning video')
+                    print(f'{title} {size / 1024}k < 100k, may be get warning video', flush=True)
                 else:
                     update = time.strftime('%Y%m%d')
                     msg = title + f"\nViewkey: {key}\n作者: #{author}\n日期: #on{update}"
                     os.system(f'python3 ./uploader.py {peer_name} {name} "{msg}" {poster}')
-                    print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 上传完成！')
+                    print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 上传完成！', flush=True)
                 os.remove(name)
             except Exception as e:
-                print("上传视频过程：", e)
+                print("上传视频过程：", e, flush=True)
                 continue
             self.old_key.append(key)
         self.updateList()
