@@ -24,13 +24,12 @@ jobs:
 
       - name: Start task
         env:
-          PASSWD: ${{ secrets.PASSWD }}
           API_ID: ${{ secrets.API_ID }}
           API_HASH: ${{ secrets.API_HASH }}
         run: |
-            openssl enc -aes128 -pbkdf2 -d -in tg_client.aes128 -out tg_client.session -pass env:PASSWD
+            openssl enc -aes128 -pbkdf2 -d -in tg_client.aes128 -out tg_client.session -pass env:API_HASH
             python3 main.py
-            openssl enc -aes128 -pbkdf2 -in tg_client.session -out tg_client.aes128 -pass env:PASSWD && rm tg_client.session
+            openssl enc -aes128 -pbkdf2 -in tg_client.session -out tg_client.aes128 -pass env:API_HASH && rm tg_client.session
 
       - name: Update repo
         run: |
