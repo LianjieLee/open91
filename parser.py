@@ -12,7 +12,7 @@ def parse(url):
                'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'}
     r = requests.get(url, headers=headers)
     soup = BeautifulSoup(r.text, 'html.parser')
-    title = soup.title.text.split('\n')[0].strip()
+    title = soup.find('div', {'class': 'video-border'}).find('h4').text.strip()
     detail = soup.find_all('div', {'id': 'videodetails-content'})[1]
     author = detail.find_all('div')[1].find('span', {'class': 'title'}).text
     poster = soup.find('video', id="player_one")['poster']
