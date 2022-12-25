@@ -55,10 +55,9 @@ class Porn:
                 print("提取视频直链过程：", e, flush=True)
                 continue
             # 下载视频
-            print(f'video dl: {video}')
+            # print(f'video dl: {video}')
             try:
                 name = os.getcwd() + f'/{key}.mp4'
-                print(name)
                 download(video, name)
                 size = os.path.getsize(name)
                 print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 下载完成！', flush=True)
