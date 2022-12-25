@@ -58,6 +58,7 @@ class Porn:
             print(f'video dl: {video}')
             try:
                 name = os.getcwd() + f'/{key}.mp4'
+                print(name)
                 download(video, name)
                 size = os.path.getsize(name)
                 print(time.strftime('%Y-%m-%d %H:%M:%S'), f'{title} 下载完成！', flush=True)

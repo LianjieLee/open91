@@ -1,7 +1,7 @@
 import subprocess
 
 def download(url, name):
-    cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-i', url, '-c', 'copy', name]
+    cmd = ['ffmpeg', '-hide_banner', '-i', url, '-c', 'copy', name]
     subprocess.run(cmd)
 
 if __name__ == '__main__':
