@@ -2,7 +2,8 @@ import subprocess
 
 def download(url, name):
     cmd = ['ffmpeg', '-hide_banner', '-i', url, '-c', 'copy', name]
-    print(cmd)
+    slp = ['sleep', '600']
+    subprocess.run(slp)
     subprocess.run(cmd)
 
 if __name__ == '__main__':
