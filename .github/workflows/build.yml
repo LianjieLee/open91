@@ -18,9 +18,9 @@ jobs:
 
       - name: Install dependence
         run: |
-          wget -q https://github.com/eugeneware/ffmpeg-static/releases/latest/download/linux-x64
-          sudo mv linux-x64  /usr/local/bin/ffmpeg && chmod +x /usr/local/bin/ffmpeg
-          #sudo npm install atob jsdom -g
+          wget -q https://github.com/eugeneware/ffmpeg-static/releases/latest/download/ffmpeg-linux-x64
+          sudo mv ffmpeg-linux-x64  /usr/local/bin/ffmpeg && chmod +x /usr/local/bin/ffmpeg
+          sudo npm install atob jsdom -g
           pip install -r requirements.txt
 
       - name: Start task
