@@ -27,9 +27,9 @@ class Porn:
         r = requests.get(url, headers=headers)
         soup = BeautifulSoup(r.text, 'html.parser')
         playlist = soup.find_all('div', {'class': 'col-xs-12 col-sm-4 col-md-3 col-lg-3'})
+        print(playlist)
         for i in playlist:
             link = i.find('a')['href']
-            print(link)
             key = parse_qs(urlparse(link).query)["viewkey"][0]
             if key not in self.old_key:
                 self.new_key.append(key)
