@@ -26,6 +26,7 @@ class Porn:
                    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'}
         r = requests.get(url, headers=headers)
         soup = BeautifulSoup(r.text, 'html.parser')
+        print(soup)
         playlist = soup.find_all('div', {'class': 'col-xs-12 col-sm-4 col-md-3 col-lg-3'})
         print(playlist)
         for i in playlist:
