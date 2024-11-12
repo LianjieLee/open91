@@ -26,9 +26,7 @@ class Porn:
                    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'}
         r = requests.get(url, headers=headers)
         soup = BeautifulSoup(r.text, 'html.parser')
-        print(soup)
-        playlist = soup.find_all('div', {'class': 'col-xs-12 col-sm-4 col-md-3 col-lg-3'})
-        print(playlist)
+        playlist = soup.find_all('div', {'class': 'col-xs-12 col-sm-4 col-md-3 col-lg-3'}) #已失效，页面中href链接已被加密
         for i in playlist:
             link = i.find('a')['href']
             key = parse_qs(urlparse(link).query)["viewkey"][0]
